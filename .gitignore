@@ -1,0 +1,24 @@
+## JVM
+*.class
+hs_err_pid*
+
+## IDEA
+.idea/
+*.ipr
+*.iws
+*.iml
+out/
+
+## Gradle
+.gradle
+gradle-app.setting
+build/
+target/
+**/target/
+
+## OSX
+.DS_Store
+
+## Drifter
+screenshots/
+lastPacked

@@ -1,0 +1,48 @@
+
+prospector.png
+size: 512,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+fastForward
+  rotate: false
+  xy: 1, 27
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+flag
+  rotate: false
+  xy: 1, 1
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+ping
+  rotate: false
+  xy: 393, 107
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+play
+  rotate: false
+  xy: 99, 27
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+slow
+  rotate: false
+  xy: 197, 27
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+tripleFast
+  rotate: false
+  xy: 295, 27
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
