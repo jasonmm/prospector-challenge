@@ -45,6 +45,8 @@ it's useful for rapid testing and comparison of new strategies.
 
 `./gradlew runHeadless`: Run a text-based tournament.
 
+Mouse over the plot in visualization mode to see the mineral value at a given coordinate.
+
 ## Questions or Concerns?
 
 Direct 'em to Justin Mullin, via Nerdery chat or at jmullin@nerdery.com.

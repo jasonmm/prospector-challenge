@@ -65,7 +65,7 @@ class PlotVisualizer(var plot: Plot) : Entity2D() {
 
                 val gridV = (((mouseV() - mapOrigin)/mapSize)*Prospector.MapSize.toFloat()).snap().clamp(0f, Prospector.MapSize.toFloat())
                 plot.grid[Coord(gridV.xI, gridV.yI)]?.let { value ->
-                    string(value.toString(), V2(gameW()-3f, 3f), Assets.uiFont, V2(-1f, 1f))
+                    string(value.toString(), mouseV() + V2(-3f, 3f), Assets.tooltipFont, V2(-1f, 1f))
                 }
             } else {
                 fill(mapOrigin, mapSize, Color.BLACK)

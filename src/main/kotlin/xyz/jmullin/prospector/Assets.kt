@@ -8,6 +8,7 @@ import xyz.jmullin.drifter.assets.DrifterAssets
 @Suppress("UNUSED")
 object Assets : DrifterAssets("prospector") {
     val uiFont by font("kenyanCoffee")
+    val tooltipFont by font("kenyanCoffeeSmall")
     val scoreFont by font("upheaval")
     val titleFont by font("minerva")
 
