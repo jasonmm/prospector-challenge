@@ -16,6 +16,7 @@ import xyz.jmullin.drifter.rendering.string
 import xyz.jmullin.prospector.Assets
 import xyz.jmullin.prospector.Prospector
 import xyz.jmullin.prospector.Stage
+import xyz.jmullin.prospector.Visualizer
 import xyz.jmullin.prospector.game.Coord
 import xyz.jmullin.prospector.game.Plot
 
@@ -58,17 +59,23 @@ class PlotVisualizer(var plot: Plot) : Entity2D() {
 
     override fun render(stage: RenderStage) {
         stage.draw(Stage.Ui) {
-            fill(mapOrigin-4f, mapSize+8f, Color.DARK_GRAY)
+            if(Visualizer.leaderboard.round < Prospector.NumPlots) {
+                fill(mapOrigin-4f, mapSize+8f, Color.DARK_GRAY)
+                fill(mapOrigin, mapSize, Color.BLACK)
+            } else {
+                fill(mapOrigin-4f, mapSize+8f, Color.DARK_GRAY.alpha(Visualizer.leaderboard.puzzleAlpha))
+                fill(mapOrigin, mapSize, Color.BLACK.alpha(Visualizer.leaderboard.puzzleAlpha))
+            }
 
             if(initialized) {
+                plotSprite.color = Color.WHITE.alpha(Visualizer.leaderboard.puzzleAlpha)
                 sprite(plotSprite, mapOrigin + V2(0f, mapSize.y), mapSize * V2(1f, -1f))
 
                 val gridV = (((mouseV() - mapOrigin)/mapSize)*Prospector.MapSize.toFloat()).snap().clamp(0f, Prospector.MapSize.toFloat())
                 plot.grid[Coord(gridV.xI, gridV.yI)]?.let { value ->
+                    Assets.tooltipFont.color = Color.WHITE.alpha(Visualizer.leaderboard.puzzleAlpha)
                     string(value.toString(), mouseV() + V2(-3f, 3f), Assets.tooltipFont, V2(-1f, 1f))
                 }
-            } else {
-                fill(mapOrigin, mapSize, Color.BLACK)
             }
         }
 

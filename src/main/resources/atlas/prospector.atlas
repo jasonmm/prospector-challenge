@@ -20,7 +20,7 @@ flag
   index: -1
 ping
   rotate: false
-  xy: 393, 107
+  xy: 393, 73
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -37,6 +37,13 @@ slow
   xy: 197, 27
   size: 96, 96
   orig: 96, 96
+  offset: 0, 0
+  index: -1
+tag
+  rotate: false
+  xy: 393, 91
+  size: 32, 32
+  orig: 32, 32
   offset: 0, 0
   index: -1
 tripleFast

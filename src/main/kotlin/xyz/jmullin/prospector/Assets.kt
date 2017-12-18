@@ -14,6 +14,7 @@ object Assets : DrifterAssets("prospector") {
 
     val ping by sprite
     val flag by sprite
+    val tag by sprite
 
     val slow by sprite
     val play by sprite

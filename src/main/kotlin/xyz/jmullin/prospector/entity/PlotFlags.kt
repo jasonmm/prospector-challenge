@@ -18,4 +18,9 @@ object PlotFlags : Entity2D() {
 
         flag.position.set(Visualizer.plotVisualizer.mapOrigin + V2(coord.x, coord.y) * scale)
     }
+
+    fun clear() {
+        flagPositions.values.forEach(Flag::remove)
+        flagPositions.clear()
+    }
 }

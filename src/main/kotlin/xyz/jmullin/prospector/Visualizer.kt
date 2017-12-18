@@ -16,7 +16,10 @@ import xyz.jmullin.prospector.game.ProspectorBot
  */
 object Visualizer : DrifterScreen() {
     private val Colors = listOf(
-        Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.CYAN, Color.MAGENTA
+        Color.RED, Color.GREEN, Color.BLUE,
+        Color.YELLOW, Color.CYAN, Color.MAGENTA,
+        Color.PURPLE, Color.WHITE, Color.ORANGE,
+        Color.OLIVE, Color.CHARTREUSE, Color.BROWN
     ) + (0 until 100).map { rColor(0.5f, 1f) }
 
     private var plot = Plot()

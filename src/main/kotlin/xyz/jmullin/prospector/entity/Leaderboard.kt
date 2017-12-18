@@ -9,10 +9,12 @@ import xyz.jmullin.drifter.entity.Entity2D
 import xyz.jmullin.drifter.extensions.*
 import xyz.jmullin.drifter.rendering.RenderStage
 import xyz.jmullin.drifter.rendering.fill
+import xyz.jmullin.drifter.rendering.sprite
 import xyz.jmullin.drifter.rendering.string
 import xyz.jmullin.prospector.Assets
 import xyz.jmullin.prospector.Prospector
 import xyz.jmullin.prospector.Stage
+import xyz.jmullin.prospector.Visualizer
 
 /**
  * Puzzle visualizer. Displays all players and their current status.
@@ -26,6 +28,7 @@ class Leaderboard : Entity2D() {
     private val displayScores = mutableMapOf<String, Float>()
 
     private var toastAlpha = 0f
+    var puzzleAlpha = 1f
 
     private val glyphLayout = GlyphLayout()
 
@@ -47,9 +50,16 @@ class Leaderboard : Entity2D() {
             toastAlpha = 1f-a
         } go(this)
 
-        delay(0.75f*Prospector.delayMultiplier) {} then event {
+        delay(0.6f*Prospector.delayMultiplier) {
+            PlotFlags.clear()
+        } then tween(0.4f*Prospector.delayMultiplier) { a ->
+            puzzleAlpha = 1f-a
+        } then event {
             scores = newScores.toMap()
-        } then delay(0.25f*Prospector.delayMultiplier) {} go(this)
+        } then delay(0.25f*Prospector.delayMultiplier) {} then tween(0.2f*Prospector.delayMultiplier) { a ->
+            if(round < Prospector.NumPlots) puzzleAlpha = a
+        } go(this)
+
     }
 
     override fun update(delta: Float) {
@@ -107,6 +117,8 @@ class Leaderboard : Entity2D() {
                         else -> Color.WHITE
                     }
                     string(score.toString(), V2(8f, y), Assets.uiFont, V2(1f, 0f))
+                    Assets.tag.color = Visualizer.playerColors[player]!!
+                    sprite(Assets.tag, V2(scoreWidth-22f, y).rectCenter(20f))
                     string(player, V2(scoreWidth, y), Assets.uiFont, V2(1f, 0f))
 
                     val toast = toasts[player] ?: 0
@@ -114,7 +126,7 @@ class Leaderboard : Entity2D() {
                         toast > 0 -> Color.GREEN
                         else -> Color.RED
                     }.alpha(toastAlpha)
-                    string("+$toast", V2(scoreWidth-8f, y), Assets.uiFont, V2(-1f, 0f))
+                    string("+$toast", V2(scoreWidth-90f, y), Assets.uiFont, V2(-1f, 0f))
                 }
 
             initYs = true
