@@ -19,7 +19,7 @@ import xyz.jmullin.prospector.game.Tournament
 fun main(args: Array<String>) {
     val reflections = Reflections("xyz.jmullin.prospector.bot")
     val bots = reflections.getSubTypesOf(ProspectorBot::class.java).mapNotNull {
-        if(!it.isInterface && !it.name.startsWith("Example")) {
+        if(!it.isInterface && !it.simpleName.startsWith("Example")) {
             it.newInstance()
         } else null
     }
