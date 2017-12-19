@@ -54,10 +54,11 @@ it's useful for rapid testing and comparison of new strategies.
 ## Visualizer Features
 
 The visualizer displays the generated plots as a color gradient so you can see where the most mineral-rich
-areas are at a glance, and how effective your bot implementations are at finding them. You can mouse over the plot
-in visualization mode to see the exact mineral value at a given coordinate.
+areas are at a glance, and how effective your bot implementations are at finding them. 
 
-Each query made by a bot 
+Each query made by a bot will display as a color-coded ping on the map. A color-code flag icon will also be placed at the
+location of the highest mineral value that has been queried by each player. You can mouse over the plot
+to see the exact mineral value at a given coordinate.
 
 ## Questions or Concerns?
 
