@@ -15,13 +15,12 @@
 
 (defn divide-and-conquer
   "Prospects by dividing a plot centered at `center` into four sections, probing `center` and the center of each section, and using the largest value as the center of a plot 1/4th the size of the current plot."
-  [[x y] dim probe]
+  [[center-x center-y] dimension probe]
   (let [probe        (probe-fn probe)
         probe-values []]
-    (loop [center-x    x
-           center-y    y
-           dimension   dim
-           probe-round 1]
+    (loop [[center-x center-y] [center-x center-y]
+           dimension           dimension
+           probe-round         1]
       (let [points-to-probe (probe-points [center-x center-y] dimension)
             probe-values    (->> points-to-probe
                                  (map (fn [[x y]] {[x y] (probe x y)}))
@@ -33,7 +32,7 @@
         ;; (println "inside let")
         ;; (println new-center)
         (if (> 19 probe-round)
-          (recur (first new-center) (second new-center) (quot dimension 2) (inc probe-round)))))))
+          (recur new-center (quot dimension 2) (inc probe-round)))))))
 
 (comment
   (def probe-values '({[256 256] 36} {[128 128] 21} {[384 128] 3} {[384 384] 19} {[128 384] 159}))
