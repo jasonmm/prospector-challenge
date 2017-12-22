@@ -1,4 +1,4 @@
-(ns xyz.jmullin.prospector.bot.JasonBotDivideAndConquer
+(ns xyz.jmullin.prospector.bot.jasonbot-algos.JasonBotDivideAndConquer
   (:require [clojure.pprint :as pp]))
 
 (defn probe-points
@@ -11,7 +11,7 @@
     [[x y] point1 point2 point3 point4]))
 
 (defn coord [x y] (new xyz.jmullin.prospector.game.Coord x y))
-(defn probe-fn [probe] (fn [x y] (println "probing" x y) (.query probe (coord x y))))
+(defn probe-fn [probe] (fn [x y] (.query probe (coord x y))))
 
 (defn divide-and-conquer
   "Prospects by dividing a plot centered at `center` into four sections, probing `center` and the center of each section, and using the largest value as the center of a plot 1/4th the size of the current plot."
@@ -22,7 +22,6 @@
            center-y    y
            dimension   dim
            probe-round 1]
-      (println "inside loop " probe-round (> 19 probe-round))
       (let [points-to-probe (probe-points [center-x center-y] dimension)
             probe-values    (->> points-to-probe
                                  (map (fn [[x y]] {[x y] (probe x y)}))

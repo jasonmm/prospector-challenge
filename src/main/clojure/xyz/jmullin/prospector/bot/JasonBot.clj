@@ -1,7 +1,7 @@
 (ns xyz.jmullin.prospector.bot.JasonBot
   ""
   (:gen-class :implements [xyz.jmullin.prospector.game.ProspectorBot])
-  (:require [xyz.jmullin.prospector.bot.JasonBotDivideAndConquer :as dac]))
+  (:require [xyz.jmullin.prospector.bot.jasonbot-algos.JasonBotDivideAndConquer :as dac]))
 
 
 (defn -getName
