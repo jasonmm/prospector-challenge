@@ -55,7 +55,7 @@
 (defn -getName
   "Return the name of your bot."
   [this]
-  "JasonBotDivideAndConquer")
+  "JasonBotDAC")
 
 (defn -prospect
   "Prospect the plot by calling .query(coord) on the provided probe instance with the desired
