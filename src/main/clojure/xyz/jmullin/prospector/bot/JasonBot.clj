@@ -38,7 +38,6 @@
                                  reverse)
             ;; _               (pp/pprint probe-values)
             new-center      (ffirst probe-values)]
-        (println @num-probes)
         (if (> 100 @num-probes)
           (recur new-center (quot dimension 2) probe-values))))))
 
@@ -56,7 +55,7 @@
 (defn -getName
   "Return the name of your bot."
   [this]
-  "JasonBot")
+  "JasonBotDivideAndConquer")
 
 (defn -prospect
   "Prospect the plot by calling .query(coord) on the provided probe instance with the desired
