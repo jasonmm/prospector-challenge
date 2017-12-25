@@ -3,6 +3,8 @@
   (:gen-class :implements [xyz.jmullin.prospector.game.ProspectorBot])
   (:require [clojure.pprint :as pp]))
 
+(def num-probes (atom 0))
+
 (defn probe-points
   [[x y] dimension]
   (let [dim-quarter (quot dimension 4)
@@ -13,36 +15,43 @@
     [[x y] point1 point2 point3 point4]))
 
 (defn coord [x y] (new xyz.jmullin.prospector.game.Coord x y))
-(defn probe-fn [probe] (fn [x y] (.query probe (coord x y))))
+(defn probe-fn
+  "Returns a function that probes a given x,y coordinate."
+  [probe]
+  (fn [x y]
+    (swap! num-probes inc)
+    (.query probe (coord x y))))
 
 (defn divide-and-conquer
   "Prospects by dividing a plot centered at `center` into four sections, probing `center` and the center of each section, and using the largest value as the center of a plot 1/4th the size of the current plot."
   [[center-x center-y] dimension probe]
-  (let [probe        (probe-fn probe)
-        probe-values []]
-    (loop [[center-x center-y] [center-x center-y]
-           dimension           dimension
-           probe-round         1]
-      (let [points-to-probe (probe-points [center-x center-y] dimension)
+  (reset! num-probes 0)
+  (let [probe (probe-fn probe)]
+    (loop [center       [center-x center-y]
+           dimension    dimension
+           probe-values []]
+      (let [points-to-probe (probe-points center dimension)
             probe-values    (->> points-to-probe
-                                 (map (fn [[x y]] {[x y] (probe x y)}))
+                                 (map (fn [[x y]] [[x y] (probe x y)]))
                                  (concat probe-values)
-                                 (into {}))
+                                 (sort-by second)
+                                 reverse)
             ;; _               (pp/pprint probe-values)
-            ;; _               (println "apply just ran")
-            new-center      (key (apply max-key val probe-values))]
-        ;; (println "inside let")
-        ;; (println new-center)
-        (if (> 19 probe-round)
-          (recur new-center (quot dimension 2) (inc probe-round)))))))
+            new-center      (ffirst probe-values)]
+        (println @num-probes)
+        (if (> 100 @num-probes)
+          (recur new-center (quot dimension 2) probe-values))))))
 
 (comment
   (def probe-values '({[256 256] 36} {[128 128] 21} {[384 128] 3} {[384 384] 19} {[128 384] 159}))
+  (def probe-values '([[256 256] 36] [[128 128] 21] [[384 128] 3] [[384 384] 19] [[128 384] 159]))
   (pp/pprint probe-values)
+  (type (first probe-values))
   (def pv-map (into {} probe-values))
-  (apply max-key val [95 477])
-  (apply max-key val pv-map)
-  )
+  (pp/pprint pv-map)
+  (def sorted-pv (reverse (sort-by second probe-values)))
+  (pp/pprint sorted-pv)
+  (apply max-key val pv-map))
 
 (defn -getName
   "Return the name of your bot."
