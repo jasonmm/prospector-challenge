@@ -1,4 +1,4 @@
-(ns xyz.jmullin.prospector.bot.JasonBotBIP10I50
+(ns xyz.jmullin.prospector.bot.JasonBotBIP10I75
   "Does a big initial probe of 50 points and a N,S,E,W delta of length 10"
   (:gen-class :implements [xyz.jmullin.prospector.game.ProspectorBot])
   (:require [clojure.pprint :as pp]))
@@ -6,7 +6,7 @@
 (def num-probes (atom 0))
 (def delta-size 10)
 (def deltas (filter (fn [[dx dy]] (or (= dx 0) (= dy 0))) (drop 1 (for [x [0 delta-size (- delta-size)] y [0 (- delta-size) delta-size]] [x y]))))
-(def initial-probe-points (for [x (range 50 500 50) y (range 50 500 50)] [x y]))
+(def initial-probe-points (for [x (range 50 500 75) y (range 50 500 75)] [x y]))
 ;; (defn initial-probe-points [[50 50] [150 50] [250 50] [350 50] [450 50]
 ;;                             [50 150] [150 150] [250 150] [350 150] [450 150]
 ;;                             [50 250] [150 250] [250 250] [350 250] [450 250]
@@ -43,7 +43,7 @@
 (defn -getName
   "Return the name of your bot."
   [this]
-  "JasonBotBIP10I50")
+  "JasonBotBIP10I75")
 
 (defn -prospect
   "Prospect the plot by calling .query(coord) on the provided probe instance with the desired
