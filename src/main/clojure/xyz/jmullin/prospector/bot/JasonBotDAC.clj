@@ -1,4 +1,4 @@
-(ns xyz.jmullin.prospector.bot.JasonBot
+(ns xyz.jmullin.prospector.bot.JasonBotDAC
   ""
   (:gen-class :implements [xyz.jmullin.prospector.game.ProspectorBot])
   (:require [clojure.pprint :as pp]))
